@@ -1,0 +1,31 @@
+{% extends 'weather/index.html' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-5 offset-1">
+        <form action="" method="post">
+            {% csrf_token %}
+            <h2>Погода в вашем городе</h2>
+            <label for="city">Город</label>
+            {{ form.name }}
+            <input type="submit" name="send" value="Узнать" class="btn btn-info mt-1">
+        </form>
+    </div>
+    <div class="col-4 offset-1">
+        <h2>Информация</h2>
+        {% for info in all_info %}
+        <div class="alert alert-info">
+            <div class="row">
+                <div class="col-9">
+                    <b>Город:</b> {{ info.city}}<br>
+                    <b>Температура:</b> {{info.temp}} <sup>o</sup><br>
+                </div>
+                <div class="col-2 offset-1">
+                    <img src="http://openweathermap.org/img/w/{{info.icon}}.png" alt="">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}
